@@ -11,7 +11,7 @@
 <body>
    <%
       DeleteAndEdit de=new DeleteAndEdit();
-      de.deleteWorker(request.getParameter("name"));
+      de.deleteWorker(request.getParameter("index"));
    %>
    <jsp:forward page="workerInfos.jsp"></jsp:forward>
    
