@@ -40,20 +40,20 @@
         	    <td><%=wk.getSitename() %></td>
         	    <td><%=wk.getWorkerbirthday() %></td>
         	    <td><%=wk.getRegistertime() %></td>
-        	    <td><a href="#">修改</a>&nbsp&nbsp<a href="#">删除</a></td>
+        	    <td><a href="#">修改</a>&nbsp&nbsp<a href="doDelete.jsp?name=<%=wk.getWorkername()%>">删除</a></td>
              </tr>
             <%
             }}
             else if(list==null){
             	for(workerBean wks:lists)
-            	{%>
+            	{ %>
             		<tr>
         	          <td><%=wks.getWorkername() %></td>
         	          <td><%=wks.getWorkercode() %></td>
         	          <td><%=wks.getSitename() %></td>
         	          <td><%=wks.getWorkerbirthday() %></td>
         	          <td><%=wks.getRegistertime() %></td>
-        	          <td><a href="#">修改</a>&nbsp&nbsp<a href="#">删除</a></td>
+        	          <td><a href="#">修改</a>&nbsp&nbsp<a href="doDelete.jsp?name=<%=wks.getWorkername()%>">删除</a></td>
                    </tr>
             	<%}
             }
