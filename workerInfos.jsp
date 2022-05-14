@@ -36,20 +36,8 @@
 		  Statement st=con.createStatement(); //用于发送sql语句
 		  String Sql=""; //查询数据库属性
 		  if(place!=null||WN!=null)
-		  {
-			  if(place!=null&&WN==null) //按照工地名称查询
-			  {
-				  
-				  Sql="select * from workerinfo where siteName="+place;
-			  }
-			  else if(place==null&&WN!=null) //按照工人名称查询
-			  {
-				  Sql="select * from workerinfo where workerName="+WN;
-			  }
-			  else if(place!=null&&WN!=null) //按照工人名称和工地名称查询
-			  {
-				  Sql="select * from workerinfo where workerName="+WN+" AND siteName="+place;
-			  }
+		  {			  
+			  Sql="select * from workerinfo where workerName like'%"+WN+"%'";
 			  //Sql="select siteName,workerCode,workerName,workerSex,workerBirthday,workerAddress,workerPhone,workerJob,workerPosition,registerTime from workerinfo";
 		  }	
 		  ResultSet rs=st.executeQuery(Sql); //执行statement对象				  
