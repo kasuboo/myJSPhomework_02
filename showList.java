@@ -1,8 +1,14 @@
 package mybean.data;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.*;
 import java.util.*;
-public class DaoT {
-	public List<workerBean> showAll() throws Exception
+public class ShowList {
+	public List<workerBean> ShowAll() throws Exception
 	{
 		Class.forName("com.mysql.jdbc.Driver"); //载入数据库驱动
 		String Url="jdbc:mysql://localhost:3306/site?serverTimezone=UTC&characterEncoding=utf-8"; //数据库
@@ -26,8 +32,7 @@ public class DaoT {
 		}
 		rs.close();
 		st.close();
-		con.close();
-	
+		con.close();	
 		return list;
 	}
 }
