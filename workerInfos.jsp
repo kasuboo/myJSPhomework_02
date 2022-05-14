@@ -37,30 +37,29 @@
 		  String Sql=""; //查询数据库属性
 		  if(place!=null||WN!=null)
 		  {
-			  Sql="select siteName,workerCode,workerName,workerSex,workerBirthday,workerAddress,workerPhone,workerJob,workerPosition,registerTime from workerinfo";
+			  if(place!=null&&WN==null) //按照工地名称查询
+			  {
+				  
+				  Sql="select * from workerinfo where siteName="+place;
+			  }
+			  else if(place==null&&WN!=null) //按照工人名称查询
+			  {
+				  Sql="select * from workerinfo where workerName="+WN;
+			  }
+			  else if(place!=null&&WN!=null) //按照工人名称和工地名称查询
+			  {
+				  Sql="select * from workerinfo where workerName="+WN+" AND siteName="+place;
+			  }
+			  //Sql="select siteName,workerCode,workerName,workerSex,workerBirthday,workerAddress,workerPhone,workerJob,workerPosition,registerTime from workerinfo";
 		  }	
-		  ResultSet rs=st.executeQuery(Sql); //执行statement对象			
-	  
+		  ResultSet rs=st.executeQuery(Sql); //执行statement对象				  
     %>
    <div>
       <table border="1">
          <tr><td>工人姓名</td><td>工人编码</td><td>工地名称</td><td>工人生日</td><td>注册时间</td><td>操作</td></tr>
     <%
         while(rs.next())
-        {        
-           if(rs.getString("siteName")==place && place!=null && WN==null) //按照工地名称查询
-           {%>
-             <tr>
-        	    <td><%=rs.getString("workerName") %></td>
-        	    <td><%=rs.getString("workerCode") %></td>
-        	    <td><%=rs.getString("siteName") %></td>
-        	    <td><%=rs.getString("workerBirthday") %></td>
-        	    <td><%=rs.getString("registerTime") %></td>
-        	    <td><a href="#">修改 删除</a></td>
-             </tr>
-         <%} 
-           else if(rs.getString("workerName")==WN && WN!=null && place==null) //按照工人名称查询
-           {%>
+        { %>    
         	 <tr>
         	    <td><%=rs.getString("workerName") %></td>
         	    <td><%=rs.getString("workerCode") %></td>
@@ -69,20 +68,11 @@
         	    <td><%=rs.getString("registerTime") %></td>
         	    <td><a href="#">修改 删除</a></td>
              </tr>
-           <%}
-           else if(rs.getString("workerName")==WN && WN!=null && rs.getString("siteName")==place && place!=null) //按照工人名称和工地名称查询
-           {%>
-        	 <tr>
-        	    <td><%=rs.getString("workerName") %></td>
-        	    <td><%=rs.getString("workerCode") %></td>
-        	    <td><%=rs.getString("siteName") %></td>
-        	    <td><%=rs.getString("workerBirthday") %></td>
-        	    <td><%=rs.getString("registerTime") %></td>
-        	    <td><a href="#">修改 删除</a></td>
-             </tr>
-           <%}
-         }
-	   } catch (SQLException e) {}
+        <%}   
+	   rs.close();
+	   st.close();
+	   con.close();
+	   } catch (SQLException e) {}	  
 	  %>
       
       </table>  
